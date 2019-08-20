@@ -3,12 +3,8 @@ const plugins = [
   ['lodash'],
 ];
 
-const prodTargets = [
-  'Chrome >=66', 'Edge >= 16', 'Firefox >= 60', 'ie >= 11',
-  'Opera >= 52', 'Safari >= 11',
-];
-
-const devTargets = ['last 2 Chrome versions', 'iOS >= 10'];
+const prodTargets = ['last 2 Chrome versions', 'iOS >= 11'];
+const devTargets = ['last 2 Chrome versions', 'iOS >= 11'];
 
 const getPresets = dev => [
   [

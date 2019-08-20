@@ -1,0 +1,10 @@
+.button__switcher {
+  margin: 5px 15px;
+  width: 3em;
+  height: 3em;
+}
+
+.button--active, .button--active:active {
+  background-color: #2e7d32;
+  color: #FFF;
+}

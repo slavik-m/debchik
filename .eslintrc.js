@@ -36,6 +36,7 @@ module.exports = {
       "ignore": [ /CLIENT_TYPE/ ]
     }],
     'no-nested-ternary': 0,
+    'no-param-reassign': 0,
 
     // TODO: in future need enable errors
     'react/sort-prop-types': ['warn'],

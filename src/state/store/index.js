@@ -2,13 +2,16 @@ import {
   createStore, combineReducers, applyMiddleware, compose,
 } from 'redux/es/redux';
 import createSagaMiddleware from 'redux-saga';
-
+import { setAutoFreeze } from 'immer';
 import runSagas from '../sagas/runSagas';
+import game from './game/reducer';
 
-import test from './test/reducer';
+if (process.env.NODE_ENV !== 'production') {
+  setAutoFreeze(false);
+}
 
 const rootReducer = combineReducers({
-  test,
+  game,
 });
 
 const composeEnhancers = (process.env.NODE_ENV !== 'production'
