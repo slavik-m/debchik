@@ -12,7 +12,7 @@ const App = () => {
   const game = useSelector(state => state.game, shallowEqual);
 
   const [playersCount, setPlayersCount] = useState(4);
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState(['Я']);
 
   function startGame() {
     if (players.filter(p => p).length < playersCount) {
@@ -26,6 +26,8 @@ const App = () => {
         [players[2], players[3]],
       ]));
   }
+
+  console.log('render');
 
   return (
     <div className="app">
@@ -51,10 +53,11 @@ const App = () => {
                     key={i}
                     className={classNames()}
                     type="text"
-                    value={players[i]}
+                    value={players[i] || ''}
                     onChange={(ev) => {
-                      players[i] = ev.target.value;
-                      setPlayers(players);
+                      const nPlayers = players.slice();
+                      nPlayers[i] = ev.target.value;
+                      setPlayers(nPlayers);
                     }}
                   />
                 ))
