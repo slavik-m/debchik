@@ -1,3 +1,3 @@
-export default function runSagas(sagaMiddleware) {
+export default function runSagas() {
   // runChatSagas(sagaMiddleware);
 }

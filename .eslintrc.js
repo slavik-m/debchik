@@ -47,6 +47,8 @@ module.exports = {
     'react/require-default-props': ['warn'],
 
     'jsx-a11y/label-has-for': ['warn'],
+    'react/no-array-index-key': ['warn'],
+    'react/prop-types': ['warn']
   },
   settings: {
     'import/resolver': {
