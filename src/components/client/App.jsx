@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import classNames from 'classnames';
+import { createGame } from '$store/game/actions';
 import Button from '$components/lib/Button';
 import Switcher from '$components/lib/Switcher';
 
@@ -14,7 +15,16 @@ const App = () => {
   const [players, setPlayers] = useState([]);
 
   function startGame() {
-    dispatch({ type: 'null' });
+    if (players.filter(p => p).length < playersCount) {
+      return;
+    }
+
+    dispatch(createGame(playersCount === 3
+      ? [players[0], players[1], players[2]]
+      : [
+        [players[0], players[1]],
+        [players[2], players[3]],
+      ]));
   }
 
   return (
