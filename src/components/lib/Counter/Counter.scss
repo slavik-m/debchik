@@ -1,0 +1,14 @@
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__value {
+    margin: 0 10px;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+  }
+}
