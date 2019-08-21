@@ -1,0 +1,13 @@
+.byte-left, .byte-right {
+  position: absolute;
+  top: 18px;
+  height: 33px;
+}
+
+.byte-right {
+  right: -45px;
+}
+
+.byte-left {
+  left: -45px;
+}
