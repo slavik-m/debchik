@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import CreateGameForm from './CreateGameForm';
+import Game from './Game';
 
 import './App.scss';
 
@@ -10,7 +11,9 @@ const App = () => {
   return (
     <div className="app">
       {
-        !game ? <CreateGameForm /> : null
+        game
+          ? <Game />
+          : <CreateGameForm />
       }
     </div>
   );
