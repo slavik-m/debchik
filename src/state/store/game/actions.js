@@ -5,3 +5,8 @@ export const createGame = (gameScore, players) => ({
   gameScore,
   players,
 });
+
+export const setEdit = edit => ({
+  type: actions.SET_EDIT,
+  edit,
+});

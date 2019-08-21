@@ -1,12 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { setEdit } from '$store/game/actions';
 import Button from '$components/lib/Button';
 import EditIcon from '$components/lib/svg/EditIcon';
 
 import './GameTable.scss';
 
 const GameTable = () => {
+  const dispatch = useDispatch();
   const players = useSelector(state => state.game.players, shallowEqual);
   const flattenPlayers = players.flat();
   const rounds = useSelector(state => state.game.rounds);
@@ -22,8 +24,8 @@ const GameTable = () => {
               D
           </td>
           {
-              players.map(player => (
-                <td className="game-table__cell">
+              players.map((player, i) => (
+                <td key={i} className="game-table__cell">
                   { Array.isArray(player) ? `${player[0][0]} + ${player[1][0]}` : player[0]}
                 </td>
               ))
@@ -41,14 +43,20 @@ const GameTable = () => {
             {dealer}
           </td>
           {
-            players.map(() => (
-              <td className="game-table__cell" />
+            players.map((_, i) => (
+              <td key={i} className="game-table__cell" />
             ))
           }
           <td>
             {
-                !selectedRound ? <Button className="button--edit"><EditIcon /></Button> : null
-              }
+              !selectedRound
+                ? (
+                  <Button className="button--edit" onClick={() => dispatch(setEdit(true))}>
+                    <EditIcon />
+                  </Button>
+                )
+                : null
+            }
           </td>
         </tr>
       </tbody>

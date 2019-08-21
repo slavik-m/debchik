@@ -1,21 +1,20 @@
 import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import GameTable from './GameTable';
+import EditRoundForm from './EditRoundForm';
 
 import './Game.scss';
 
 const Game = () => {
-  const players = useSelector(state => state.game.players, shallowEqual);
-  const flattenPlayers = players.flat();
-  const rounds = useSelector(state => state.game.rounds);
-  const selectedRound = useSelector(state => state.game.selectedRound);
-  const columns = players.length;
-
-  const dealer = flattenPlayers[rounds.length % flattenPlayers.length];
+  const edit = useSelector(state => state.game.edit, shallowEqual);
+  const selectedRound = useSelector(state => state.game.selectedRound, shallowEqual);
 
   return (
     <div className="game">
-      <GameTable />
+      { !edit
+        ? <GameTable />
+        : <EditRoundForm />
+      }
     </div>
   );
 };
