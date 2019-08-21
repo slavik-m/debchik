@@ -24,12 +24,12 @@ const GameTable = () => {
               D
           </td>
           {
-              players.map((player, i) => (
-                <td key={i} className="game-table__cell">
-                  { Array.isArray(player) ? `${player[0][0]} + ${player[1][0]}` : player[0]}
-                </td>
-              ))
-            }
+            players.map((player, i) => (
+              <td key={i} className="game-table__cell">
+                { Array.isArray(player) ? `${player[0][0]} + ${player[1][0]}` : player[0]}
+              </td>
+            ))
+          }
           <td />
         </tr>
       </thead>
