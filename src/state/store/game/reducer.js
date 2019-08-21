@@ -11,6 +11,7 @@ export default (state = initialState, action = {}) => produce(state, (draft) => 
         id: uuid(),
         players: action.players,
         gameScore: action.gameScore,
+        selectedRound: null,
         rounds: [],
       };
     case actionTypes.ADD_ROUND_SCORE:
