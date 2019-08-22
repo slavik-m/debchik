@@ -37,6 +37,7 @@ module.exports = {
     }],
     'no-nested-ternary': 0,
     'no-param-reassign': 0,
+    'no-restricted-globals': 0,
 
     // TODO: in future need enable errors
     'react/sort-prop-types': ['warn'],

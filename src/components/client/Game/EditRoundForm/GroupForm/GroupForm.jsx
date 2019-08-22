@@ -12,6 +12,8 @@ const GroupForm = () => {
   const [bella, setBella] = useState(false);
   const [twenty, setTwenty] = useState(0);
   const [fifty, setFifty] = useState(0);
+  const [scores, setScores] = useState(['', '']);
+
   const players = useSelector(state => state.game.players, shallowEqual);
   const flattenPlayers = players.flat();
   // const selectedRound = useSelector(state => state.game.selectedRound, shallowEqual);
@@ -21,6 +23,26 @@ const GroupForm = () => {
   const [gamePlayer, setGamePlayer] = useState(dealer);
 
   const roundScore = 162 + (bella ? 20 : 0) + twenty * 20 + fifty * 50;
+
+  function isValidScores() {
+    return Math.abs(scores[0] + scores[1]) === roundScore;
+  }
+
+  function onScoreChange(i, value) {
+    const nScore = scores.slice();
+
+    if (isNaN(value)) {
+      nScore[i] = value || '';
+      nScore[i === 0 ? 1 : 0] = roundScore - 0;
+
+      setScores(nScore);
+    } else if (value <= roundScore) {
+      nScore[i] = value || '';
+      nScore[i === 0 ? 1 : 0] = roundScore - value;
+
+      setScores(nScore);
+    }
+  }
 
   return (
     <>
@@ -59,14 +81,14 @@ const GroupForm = () => {
             <div key={i} className="scores__item">
               {
                 (player[0] === gamePlayer || player[1] === gamePlayer) && i === 0
-                  ? <Button className="byte-left">B</Button>
+                  ? <Button className="byte-left" onClick={() => onScoreChange(i, 0)}>B</Button>
                   : null
               }
               { `${player[0][0]} + ${player[1][0]}`}
-              <input type="text" />
+              <input type="number" value={scores[i]} onChange={ev => onScoreChange(i, parseInt(ev.target.value, 10))} />
               {
                 (player[0] === gamePlayer || player[1] === gamePlayer) && i === 1
-                  ? <Button className="byte-right">B</Button>
+                  ? <Button className="byte-right" onClick={() => onScoreChange(i, 0)}>B</Button>
                   : null
               }
             </div>
@@ -76,7 +98,7 @@ const GroupForm = () => {
 
       <div className="edit-round-form__buttons">
         <Button onClick={() => dispatch(setEdit(false))}>Cancel</Button>
-        <Button>Confirm</Button>
+        <Button disabled={!isValidScores()}>Confirm</Button>
       </div>
     </>
   );
