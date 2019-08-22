@@ -3,7 +3,6 @@
 
 .idea/
 node_modules/
-dist/
 stats.json
 build/config.js
 coverage/
