@@ -85,7 +85,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new WebpackGitHash(),
+    // new WebpackGitHash(),
     new CircularDependencyPlugin({
       exclude: /node_modules/,
       // add errors to webpack instead of warnings
@@ -130,8 +130,8 @@ module.exports = {
     }),
   ],
   output: {
-    filename: devMode ? '[name].js' : '[name].[githash].js',
-    chunkFilename: devMode ? '[id].js' : '[id].[githash].js',
+    filename: devMode ? '[name].js' : '[name].min.js',
+    chunkFilename: devMode ? '[id].js' : '[id].min.js',
     path: path.join(__dirname, '..', 'dist'),
   },
   resolve: {
