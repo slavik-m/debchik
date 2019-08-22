@@ -10,11 +10,16 @@ import './GameTable.scss';
 const GameTable = () => {
   const dispatch = useDispatch();
   const players = useSelector(state => state.game.players, shallowEqual);
+  // TODO: bug
   const flattenPlayers = players.flat();
   const rounds = useSelector(state => state.game.rounds);
   const selectedRound = useSelector(state => state.game.selectedRound);
 
   const dealer = flattenPlayers[rounds.length % flattenPlayers.length];
+
+  function getTotalRoundScore(i, si) {
+    return rounds.slice(0, i + 1).reduce((acc, cur) => acc + cur.scores[si], 0);
+  }
 
   return (
     <table className="game-table">
@@ -47,7 +52,7 @@ const GameTable = () => {
                 {flattenPlayers[i % flattenPlayers.length]}
               </td>
               {
-                round.scores.map((score, i) => {
+                round.scores.map((score, si) => {
                   // TODO: eggs
                   let scoreString = '';
 
@@ -60,11 +65,11 @@ const GameTable = () => {
                   }
 
                   if (score > 0) {
-                    scoreString = score;
+                    scoreString = getTotalRoundScore(i, si);
                   }
 
                   return (
-                    <td key={i} className="game-table__cell">{scoreString}</td>
+                    <td key={si} className="game-table__cell">{scoreString}</td>
                   );
                 })
               }

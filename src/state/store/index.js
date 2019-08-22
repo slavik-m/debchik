@@ -6,7 +6,7 @@ import { setAutoFreeze } from 'immer';
 import runSagas from '../sagas/runSagas';
 import game from './game/reducer';
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'production') {
   setAutoFreeze(false);
 }
 

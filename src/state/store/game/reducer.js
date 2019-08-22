@@ -23,7 +23,7 @@ export default (state = initialState, action = {}) => produce(state, (draft) => 
         // TODO: duplicate
         const roundScore = 162 + (action.round.bella ? 20 : 0) + action.round.twenty * 20 + action.round.fifty * 50;
         const flattenPlayers = draft.players.flat();
-        const gamePlayerIndex = flattenPlayers.indexOf(action.round.gamePlayer) > 1
+        const gamePlayerIndex = flattenPlayers.indexOf(action.round.gamePlayer) > 1;
         const byte = (gamePlayerIndex < 2 && action.round.scores[0] === 0)
           || (gamePlayerIndex > 1 && action.round.scores[1] === 0);
 
