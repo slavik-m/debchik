@@ -19,7 +19,7 @@ const GroupForm = () => {
   // const selectedRound = useSelector(state => state.game.selectedRound, shallowEqual);
   const rounds = useSelector(state => state.game.rounds);
 
-  const dealer = flattenPlayers[rounds.length % flattenPlayers.length];
+  const dealer = flattenPlayers[[0, 2, 1, 3][rounds.length % flattenPlayers.length]];
   const [gamePlayer, setGamePlayer] = useState(dealer);
 
   const roundScore = 162 + (bella ? 20 : 0) + twenty * 20 + fifty * 50;

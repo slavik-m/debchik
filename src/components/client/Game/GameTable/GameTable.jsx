@@ -10,12 +10,13 @@ import './GameTable.scss';
 const GameTable = () => {
   const dispatch = useDispatch();
   const players = useSelector(state => state.game.players, shallowEqual);
+  const end = useSelector(state => state.game.end, shallowEqual);
   // TODO: bug
   const flattenPlayers = players.flat();
   const rounds = useSelector(state => state.game.rounds);
   const selectedRound = useSelector(state => state.game.selectedRound);
 
-  const dealer = flattenPlayers[rounds.length % flattenPlayers.length];
+  const dealer = flattenPlayers[[0, 2, 1, 3][rounds.length % flattenPlayers.length]];
 
   function getTotalRoundScore(i, si) {
     return rounds.slice(0, i + 1).reduce((acc, cur) => acc + cur.scores[si], 0);
@@ -49,7 +50,7 @@ const GameTable = () => {
               )}
             >
               <td className="game-table__cell">
-                {flattenPlayers[i % flattenPlayers.length]}
+                {flattenPlayers[[0, 2, 1, 3][i % flattenPlayers.length]]}
               </td>
               {
                 round.scores.map((score, si) => {
@@ -87,21 +88,22 @@ const GameTable = () => {
             </tr>
           ))
         }
-        <tr className={classNames(
-          'game-table__row',
-          { 'game-table__row--active': !selectedRound },
-        )}
-        >
-          <td className="game-table__cell">
-            {dealer}
-          </td>
-          {
+        { !end ? (
+          <tr className={classNames(
+            'game-table__row',
+            { 'game-table__row--active': !selectedRound },
+          )}
+          >
+            <td className="game-table__cell">
+              {dealer}
+            </td>
+            {
             players.map((_, i) => (
               <td key={i} className="game-table__cell" />
             ))
           }
-          <td>
-            {
+            <td>
+              {
               !selectedRound
                 ? (
                   <Button className="button--edit" onClick={() => dispatch(setEdit(true))}>
@@ -110,8 +112,9 @@ const GameTable = () => {
                 )
                 : null
             }
-          </td>
-        </tr>
+            </td>
+          </tr>
+        ) : null }
       </tbody>
     </table>
   );
