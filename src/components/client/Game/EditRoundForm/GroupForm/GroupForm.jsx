@@ -37,7 +37,7 @@ const GroupForm = () => {
 
       setScores(nScore);
     } else if (value <= roundScore) {
-      nScore[i] = value || '';
+      nScore[i] = value || 0;
       nScore[i === 0 ? 1 : 0] = roundScore - value;
 
       setScores(nScore);
@@ -84,11 +84,21 @@ const GroupForm = () => {
                   ? <Button className="byte-left" onClick={() => onScoreChange(i, 0)}>B</Button>
                   : null
               }
+              {
+                (player[0] === gamePlayer || player[1] === gamePlayer) && i === 0 && scores[i] === 0
+                  ? <div className="byte-left-label">B</div>
+                  : null
+              }
               { `${player[0][0]} + ${player[1][0]}`}
               <input type="number" value={scores[i]} onChange={ev => onScoreChange(i, parseInt(ev.target.value, 10))} />
               {
                 (player[0] === gamePlayer || player[1] === gamePlayer) && i === 1
                   ? <Button className="byte-right" onClick={() => onScoreChange(i, 0)}>B</Button>
+                  : null
+              }
+              {
+                (player[0] === gamePlayer || player[1] === gamePlayer) && i === 1 && scores[i] === 0
+                  ? <div className="byte-right-label">B</div>
                   : null
               }
             </div>

@@ -11,3 +11,24 @@
 .byte-left {
   left: -45px;
 }
+
+.byte-right-label, .byte-left-label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 18px;
+  height: 33px;
+  width: 86px;
+  border-radius: 2px;
+  background-color: #d32f2f;
+  color: #FFF;
+}
+
+.byte-right-label {
+  right: 0;
+}
+
+.byte-left-label {
+  left: 0;
+}
