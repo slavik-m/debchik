@@ -34,6 +34,54 @@ const GameTable = () => {
         </tr>
       </thead>
       <tbody>
+        {
+          rounds.map((round, i) => (
+            <tr
+              key={i}
+              className={classNames(
+                'game-table__row',
+                { 'game-table__row--active': selectedRound === round.id },
+              )}
+            >
+              <td className="game-table__cell">
+                {flattenPlayers[i % flattenPlayers.length]}
+              </td>
+              {
+                round.scores.map((score, i) => {
+                  // TODO: eggs
+                  let scoreString = '';
+
+                  if (round.byte && score === 0) {
+                    scoreString = 'B';
+                  }
+
+                  if (!round.byte && score === 0) {
+                    scoreString = '-';
+                  }
+
+                  if (score > 0) {
+                    scoreString = score;
+                  }
+
+                  return (
+                    <td key={i} className="game-table__cell">{scoreString}</td>
+                  );
+                })
+              }
+              <td>
+                {
+                  selectedRound === round.id
+                    ? (
+                      <Button className="button--edit" onClick={() => dispatch(setEdit(true))}>
+                        <EditIcon />
+                      </Button>
+                    )
+                    : null
+                }
+              </td>
+            </tr>
+          ))
+        }
         <tr className={classNames(
           'game-table__row',
           { 'game-table__row--active': !selectedRound },

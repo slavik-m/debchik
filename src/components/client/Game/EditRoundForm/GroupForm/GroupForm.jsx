@@ -3,7 +3,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import Button from '$components/lib/Button';
 import ToggleButton from '$components/lib/ToggleButton';
 import Counter from '$components/lib/Counter';
-import { setEdit } from '$store/game/actions';
+import { setEdit, changeRound } from '$store/game/actions';
 
 import './GroupForm.scss';
 
@@ -42,6 +42,16 @@ const GroupForm = () => {
 
       setScores(nScore);
     }
+  }
+
+  function onSubmit() {
+    dispatch(changeRound({
+      gamePlayer,
+      bella,
+      twenty,
+      fifty,
+      scores,
+    }));
   }
 
   return (
@@ -108,7 +118,7 @@ const GroupForm = () => {
 
       <div className="edit-round-form__buttons">
         <Button onClick={() => dispatch(setEdit(false))}>Cancel</Button>
-        <Button disabled={!isValidScores()}>Confirm</Button>
+        <Button disabled={!isValidScores()} onClick={onSubmit}>Confirm</Button>
       </div>
     </>
   );
