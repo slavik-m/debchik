@@ -132,7 +132,7 @@ module.exports = {
   output: {
     filename: devMode ? '[name].js' : '[name].min.js',
     chunkFilename: devMode ? '[id].js' : '[id].min.js',
-    path: path.join(__dirname, '..', 'dist'),
+    path: path.join(__dirname, '..', 'docs'),
   },
   resolve: {
     alias: {
