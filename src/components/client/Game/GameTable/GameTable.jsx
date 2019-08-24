@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { setEdit, newGame } from '$store/game/actions';
@@ -10,6 +10,7 @@ import './GameTable.scss';
 
 const GameTable = () => {
   const dispatch = useDispatch();
+  const [confirm, setConfirm] = useState(false);
   const players = useSelector(state => state.game.players, shallowEqual);
   const flattenPlayers = players.flat();
   const rounds = useSelector(state => state.game.rounds);
@@ -18,8 +19,6 @@ const GameTable = () => {
 
   const dealer = flattenPlayers[[0, 2, 1, 3][rounds.length % flattenPlayers.length]];
   const winnerIndex = getWinnerIndex(rounds, players, score);
-
-  console.log(winnerIndex);
 
   function getTotalRoundScore(i, si) {
     return rounds.slice(0, i + 1).reduce((acc, cur) => acc + cur.scores[si], 0);
@@ -144,9 +143,22 @@ const GameTable = () => {
             ) }
         </tbody>
       </table>
-      <Button className="button__new-game" onClick={() => dispatch(newGame())}>
-        New game
-      </Button>
+      {
+        confirm ? (
+          <div>
+            <Button className="button__new-game" onClick={() => setConfirm(false)}>
+              Cancel
+            </Button>
+            <Button className="button__new-game" onClick={() => dispatch(newGame())}>
+              Confirm
+            </Button>
+          </div>
+        ) : (
+          <Button className="button__new-game" onClick={() => setConfirm(true)}>
+            New game
+          </Button>
+        )
+      }
     </div>
   );
 };
