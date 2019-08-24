@@ -4,19 +4,22 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { setEdit } from '$store/game/actions';
 import Button from '$components/lib/Button';
 import EditIcon from '$components/lib/svg/EditIcon';
+import getWinnerIndex from '$helpers/getWinnerIndex';
 
 import './GameTable.scss';
 
 const GameTable = () => {
   const dispatch = useDispatch();
   const players = useSelector(state => state.game.players, shallowEqual);
-  const end = useSelector(state => state.game.end, shallowEqual);
-  // TODO: bug
   const flattenPlayers = players.flat();
   const rounds = useSelector(state => state.game.rounds);
+  const score = useSelector(state => state.game.gameScore);
   const selectedRound = useSelector(state => state.game.selectedRound);
 
   const dealer = flattenPlayers[[0, 2, 1, 3][rounds.length % flattenPlayers.length]];
+  const winnerIndex = getWinnerIndex(rounds, players, score);
+
+  console.log(winnerIndex);
 
   function getTotalRoundScore(i, si) {
     return rounds.slice(0, i + 1).reduce((acc, cur) => acc + cur.scores[si], 0);
@@ -53,19 +56,19 @@ const GameTable = () => {
                 {flattenPlayers[[0, 2, 1, 3][i % flattenPlayers.length]]}
               </td>
               {
-                round.scores.map((score, si) => {
+                round.scores.map((s, si) => {
                   // TODO: eggs
                   let scoreString = '';
 
-                  if (round.byte && score === 0) {
+                  if (round.byte && s === 0) {
                     scoreString = 'B';
                   }
 
-                  if (!round.byte && score === 0) {
+                  if (!round.byte && s === 0) {
                     scoreString = '-';
                   }
 
-                  if (score > 0) {
+                  if (s > 0) {
                     scoreString = getTotalRoundScore(i, si);
                   }
 
@@ -88,7 +91,7 @@ const GameTable = () => {
             </tr>
           ))
         }
-        { !end ? (
+        { winnerIndex === -1 ? (
           <tr className={classNames(
             'game-table__row',
             { 'game-table__row--active': !selectedRound },
@@ -98,10 +101,10 @@ const GameTable = () => {
               {dealer}
             </td>
             {
-            players.map((_, i) => (
-              <td key={i} className="game-table__cell" />
-            ))
-          }
+              players.map((_, i) => (
+                <td key={i} className="game-table__cell" />
+              ))
+            }
             <td>
               {
               !selectedRound
@@ -114,7 +117,23 @@ const GameTable = () => {
             }
             </td>
           </tr>
-        ) : null }
+        )
+          : (
+            <tr className={classNames(
+              'game-table__row--winners',
+            )}
+            >
+              <td className="game-table__cell" />
+              {
+                players.map((_, i) => (
+                  <td key={i} className="game-table__cell">
+                    { i === winnerIndex ? 'W' : '' }
+                  </td>
+                ))
+              }
+              <td />
+            </tr>
+          ) }
       </tbody>
     </table>
   );
