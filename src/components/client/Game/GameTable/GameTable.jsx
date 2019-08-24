@@ -144,9 +144,9 @@ const GameTable = () => {
             ) }
         </tbody>
       </table>
-      {winnerIndex !== -1 ? (
-        <Button className="button__new-game" onClick={() => dispatch(newGame())}>New game</Button>
-      ) : null}
+      <Button className="button__new-game" onClick={() => dispatch(newGame())}>
+        New game
+      </Button>
     </div>
   );
 };

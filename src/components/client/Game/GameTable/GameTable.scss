@@ -6,7 +6,7 @@
     border: 1px solid #e1e1e1;
 
     &:first-child {
-      min-width: 65px;
+      min-width: 70px;
       font-size: 0.8em;
     }
 
@@ -18,18 +18,17 @@
 
   thead {
     font-weight: 600;
-  }
 
-  &__header {
-    &-cell {
-      padding: 5px;
-      height: 40px;
+    .game-table {
+      &__cell {
+        height: 32px;
+      }
     }
   }
 
   &__cell {
-    height: 40px;
-    padding: 3px 10px;
+    height: 42px;
+    min-width: 50px;
   }
 
   &__row {
@@ -46,12 +45,13 @@
       .game-table__cell--score {
         font-size: 1.2em;
         font-weight: bold;
+        padding: 5px;
       }
     }
   }
 
   .button--edit {
-    margin: 0 5px;
+    margin: 0 0 0 5px;
     border-radius: 50%;
     width: 52px;
     height: 52px;
