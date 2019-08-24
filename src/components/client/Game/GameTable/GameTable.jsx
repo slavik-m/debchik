@@ -68,6 +68,10 @@ const GameTable = () => {
                     scoreString = '-';
                   }
 
+                  if (!round.byte && s === 0 && round.eggs) {
+                    scoreString = 'ထ';
+                  }
+
                   if (s > 0) {
                     scoreString = getTotalRoundScore(i, si);
                   }
