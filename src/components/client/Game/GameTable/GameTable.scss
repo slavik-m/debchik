@@ -7,6 +7,7 @@
 
     &:first-child {
       min-width: 65px;
+      font-size: 0.8em;
     }
 
     &:last-child {
@@ -20,7 +21,6 @@
   }
 
   &__header {
-
     &-cell {
       padding: 5px;
       height: 40px;
@@ -29,12 +29,24 @@
 
   &__cell {
     height: 40px;
-    padding: 5px 10px;
+    padding: 3px 10px;
   }
 
   &__row {
     &--active td {
       background: #EBEBEB;
+    }
+
+    &--winners {
+      color: red;
+      font-weight: bold;
+    }
+
+    &:nth-last-child(2) {
+      .game-table__cell--score {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
     }
   }
 
@@ -44,4 +56,13 @@
     width: 52px;
     height: 52px;
   }
+}
+
+.round-score-value {
+  font-size: 0.4em;
+  color: #2E7D32;
+}
+
+.button__new-game {
+  margin-top: 20px;
 }

@@ -6,6 +6,10 @@ export const createGame = (gameScore, players) => ({
   players,
 });
 
+export const newGame = () => ({
+  type: actions.NEW_GAME,
+});
+
 export const setEdit = edit => ({
   type: actions.SET_EDIT,
   edit,

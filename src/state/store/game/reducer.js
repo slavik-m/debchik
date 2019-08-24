@@ -21,6 +21,8 @@ export default (state = initialState, action = {}) => produce(state, (draft) => 
         edit: false,
         rounds: [],
       };
+    case actionTypes.NEW_GAME:
+      return null;
     case actionTypes.SET_EDIT:
       draft.edit = action.edit;
       return draft;

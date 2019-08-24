@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { setEdit } from '$store/game/actions';
+import { setEdit, newGame } from '$store/game/actions';
 import Button from '$components/lib/Button';
 import EditIcon from '$components/lib/svg/EditIcon';
 import getWinnerIndex from '$helpers/getWinnerIndex';
@@ -26,24 +26,25 @@ const GameTable = () => {
   }
 
   return (
-    <table className="game-table">
-      <thead>
-        <tr>
-          <td className="game-table__cell">
+    <div>
+      <table className="game-table">
+        <thead>
+          <tr>
+            <td className="game-table__cell">
               D
-          </td>
-          {
+            </td>
+            {
             players.map((player, i) => (
               <td key={i} className="game-table__cell">
                 { Array.isArray(player) ? `${player[0][0]} + ${player[1][0]}` : player[0]}
               </td>
             ))
           }
-          <td />
-        </tr>
-      </thead>
-      <tbody>
-        {
+            <td />
+          </tr>
+        </thead>
+        <tbody>
+          {
           rounds.map((round, i) => (
             <tr
               key={i}
@@ -77,7 +78,10 @@ const GameTable = () => {
                   }
 
                   return (
-                    <td key={si} className="game-table__cell">{scoreString}</td>
+                    <td key={si} className="game-table__cell game-table__cell--score">
+                      { i !== 0 ? <div className="round-score-value">{`+${s}`}</div> : null }
+                      {scoreString}
+                    </td>
                   );
                 })
               }
@@ -95,22 +99,22 @@ const GameTable = () => {
             </tr>
           ))
         }
-        { winnerIndex === -1 ? (
-          <tr className={classNames(
-            'game-table__row',
-            { 'game-table__row--active': !selectedRound },
-          )}
-          >
-            <td className="game-table__cell">
-              {dealer}
-            </td>
-            {
+          { winnerIndex === -1 ? (
+            <tr className={classNames(
+              'game-table__row',
+              { 'game-table__row--active': !selectedRound },
+            )}
+            >
+              <td className="game-table__cell">
+                {dealer}
+              </td>
+              {
               players.map((_, i) => (
                 <td key={i} className="game-table__cell" />
               ))
             }
-            <td>
-              {
+              <td>
+                {
               !selectedRound
                 ? (
                   <Button className="button--edit" onClick={() => dispatch(setEdit(true))}>
@@ -119,27 +123,31 @@ const GameTable = () => {
                 )
                 : null
             }
-            </td>
-          </tr>
-        )
-          : (
-            <tr className={classNames(
-              'game-table__row--winners',
-            )}
-            >
-              <td className="game-table__cell" />
-              {
+              </td>
+            </tr>
+          )
+            : (
+              <tr className={classNames(
+                'game-table__row--winners',
+              )}
+              >
+                <td className="game-table__cell" />
+                {
                 players.map((_, i) => (
                   <td key={i} className="game-table__cell">
                     { i === winnerIndex ? 'W' : '' }
                   </td>
                 ))
               }
-              <td />
-            </tr>
-          ) }
-      </tbody>
-    </table>
+                <td />
+              </tr>
+            ) }
+        </tbody>
+      </table>
+      {winnerIndex !== -1 ? (
+        <Button className="button__new-game" onClick={() => dispatch(newGame())}>New game</Button>
+      ) : null}
+    </div>
   );
 };
 
