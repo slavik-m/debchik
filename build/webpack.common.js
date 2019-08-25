@@ -1,12 +1,9 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 const path = require('path');
 const webpack = require('webpack');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WebpackGitHash = require('webpack-git-hash');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
@@ -93,10 +90,9 @@ module.exports = {
       // set the current working directory for displaying module paths
       cwd: process.cwd(),
     }),
-    new CleanWebpackPlugin(),
-    new CopyWebpackPlugin([
+    /* new CopyWebpackPlugin([
       path.resolve(__dirname, '../src/assets/images'),
-    ]),
+    ]), */
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].min.css',
       chunkFilename: devMode ? '[id].css' : '[id].min.css',
