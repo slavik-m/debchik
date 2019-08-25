@@ -32,11 +32,21 @@ export default (state = initialState, action = {}) => produce(state, (draft) => 
         const roundScore = 162 + (action.round.bella ? 20 : 0) + action.round.twenty * 20 + action.round.fifty * 50;
         const flattenPlayers = draft.players.flat();
         const gamePlayerIndex = flattenPlayers.indexOf(action.round.gamePlayer);
-        const byte = (gamePlayerIndex < 2 && action.round.scores[0] === 0)
-          || (gamePlayerIndex > 1 && action.round.scores[1] === 0);
+        const byte = (gamePlayerIndex < 2 && action.round.scores[0] < action.round.scores[1])
+          || (gamePlayerIndex > 1 && action.round.scores[1] < action.round.scores[0]);
 
         const eggs = action.round.scores[0] === action.round.scores[1] && action.round.scores[1];
         const scores = action.round.scores;
+
+        if (byte && action.round.scores[0] < action.round.scores[1]) {
+          scores[0] = 0;
+          scores[1] = roundScore;
+        }
+
+        if (byte && action.round.scores[1] < action.round.scores[0]) {
+          scores[1] = 0;
+          scores[0] = roundScore;
+        }
 
         const previousRound = draft.rounds[draft.rounds.length - 1];
 
