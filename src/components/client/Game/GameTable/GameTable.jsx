@@ -5,6 +5,7 @@ import { setEdit, newGame } from '$store/game/actions';
 import Button from '$components/lib/Button';
 import EditIcon from '$components/lib/svg/EditIcon';
 import getWinnerIndex from '$helpers/getWinnerIndex';
+import isOwnGame from '$helpers/isOwnGame';
 
 import './GameTable.scss';
 
@@ -54,6 +55,13 @@ const GameTable = () => {
             >
               <td className="game-table__cell">
                 {flattenPlayers[[0, 2, 1, 3][i % flattenPlayers.length]]}
+                <div className={classNames(
+                  'game-player',
+                  { 'game-player--own': isOwnGame(flattenPlayers, flattenPlayers[[0, 2, 1, 3][i % flattenPlayers.length]], round.gamePlayer) },
+                )}
+                >
+                  {round.gamePlayer}
+                </div>
               </td>
               {
                 round.scores.map((s, si) => {
@@ -94,6 +102,7 @@ const GameTable = () => {
                     )
                     : null
                 }
+                <div className="round-score">{round.roundScore}</div>
               </td>
             </tr>
           ))

@@ -13,6 +13,7 @@
     &:last-child {
       border: none;
       background: #FFF;
+      position: relative;
     }
   }
 
@@ -61,6 +62,24 @@
 .round-score-value {
   font-size: 0.4em;
   color: #2E7D32;
+}
+
+.round-score {
+  position: absolute;
+  top: 21px;
+  left: -67px;
+  font-size: 0.4em;
+  color: #b1601b;
+  background: #FFF;
+}
+
+.game-player {
+  font-size: 0.4em;
+  color: red;
+
+  &--own {
+    color: #2E7D32;
+  }
 }
 
 .button__new-game {
