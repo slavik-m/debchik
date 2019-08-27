@@ -3,6 +3,12 @@
 }
 
 .game-form__player-names {
+  margin: 15px 0;
+  input {
+    height: 35px;
+    padding: 0 11px;
+  }
+
   :nth-child(1) {
     background-color: #fff9c4;
   }
@@ -17,6 +23,7 @@
 }
 
 .player-names--grouped {
+
   :nth-child(1) {
     background-color: #fff9c4;
   }
