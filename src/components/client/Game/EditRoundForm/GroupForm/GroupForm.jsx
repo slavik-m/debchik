@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import Button from '$components/lib/Button';
-import ToggleButton from '$components/lib/ToggleButton';
+import Switch from '$components/lib/Switch';
 import Counter from '$components/lib/Counter';
 import { setEdit, changeRound } from '$store/game/actions';
 import { getSelectedRound, getSelectedRoundIndex } from '$state/selectors/game';
@@ -66,28 +66,37 @@ const GroupForm = () => {
         <b>{roundScore}</b>
       </div>
       <div>
-        <ToggleButton selected={bella} onChange={setBella}>
-          Bella
-        </ToggleButton>
-        <Counter value={twenty} onChange={setTwenty}>
-          Twenty:
-        </Counter>
-        <Counter value={fifty} onChange={setFifty}>
-          Fifty:
-        </Counter>
-        <div>
+        <div className="options__item">
+          <div className="bella">
+            Bella
+            <Switch selected={bella} onChange={setBella} />
+          </div>
+        </div>
+        <div className="options__item">
+          <Counter value={twenty} onChange={setTwenty}>
+            Twenty:
+          </Counter>
+        </div>
+        <div className="options__item">
+          <Counter value={fifty} onChange={setFifty}>
+            Fifty:
+          </Counter>
+        </div>
+        <div className="options__item">
           Dealer:
           {' '}
           <b>{dealer}</b>
         </div>
-        <div>Player:</div>
-        <select id="player" value={gamePlayer} onChange={ev => setGamePlayer(ev.target.value)}>
-          {
-            flattenPlayers.map(player => (
-              <option key={player} value={player}>{player}</option>
-            ))
-          }
-        </select>
+        <div className="options__item flex-center">
+          <div>Player:</div>
+          <select id="player" value={gamePlayer} onChange={ev => setGamePlayer(ev.target.value)}>
+            {
+              flattenPlayers.map(player => (
+                <option key={player} value={player}>{player}</option>
+              ))
+            }
+          </select>
+        </div>
       </div>
       <div className="edit-round-form__scores">
         {

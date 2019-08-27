@@ -38,3 +38,13 @@
 .byte-left-label {
   left: 0;
 }
+
+.bella {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.options__item {
+  margin: 5px 0;
+}

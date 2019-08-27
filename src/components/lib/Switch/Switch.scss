@@ -1,0 +1,47 @@
+$width: 50px;
+$padding: 0;
+$height: $width / 2 + $padding;
+
+*, *::before, *::after { box-sizing: inherit; }
+
+.switch-wrap {
+  cursor: pointer;
+  // background: #15273b;
+  padding: $padding;
+  width: $width;
+  height: $height;
+  border-radius: $height / 2;
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+.switch {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 0fr 1fr 1fr;
+  transition: .2s;
+  border: 2px solid #dedede;
+  border-radius: $height / 2;
+  //ICYMI, pseudo elements are treated as grid items
+  &::after {
+    content: '';
+    border-radius: 50%;
+    background: #FFF;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    grid-column: 2;
+    transition: background .2s;
+  }
+}
+input:checked {
+  + .switch {
+    background-color: #52cf71;
+    border-color: #52cf71;
+    grid-template-columns: 1fr 1fr 0fr;
+    &::after {
+      // background-color: #52cf71;
+    }
+  }
+}
