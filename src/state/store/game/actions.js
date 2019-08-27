@@ -15,6 +15,11 @@ export const setEdit = edit => ({
   edit,
 });
 
+export const selectRound = roundId => ({
+  type: actions.SELECT_ROUND,
+  roundId,
+});
+
 export const changeRound = (round, roundId = null) => ({
   type: actions.CHANGE_ROUND,
   round,

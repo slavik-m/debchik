@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { setEdit, newGame } from '$store/game/actions';
+import { setEdit, newGame, selectRound } from '$store/game/actions';
 import Button from '$components/lib/Button';
 import EditIcon from '$components/lib/svg/EditIcon';
 import getWinnerIndex from '$helpers/getWinnerIndex';
@@ -52,6 +52,7 @@ const GameTable = () => {
                 'game-table__row',
                 { 'game-table__row--active': selectedRound === round.id },
               )}
+              onClick={() => dispatch(selectRound(round.id))}
             >
               <td className="game-table__cell">
                 {flattenPlayers[[0, 2, 1, 3][i % flattenPlayers.length]]}
@@ -108,10 +109,12 @@ const GameTable = () => {
           ))
         }
           { winnerIndex === -1 ? (
-            <tr className={classNames(
-              'game-table__row',
-              { 'game-table__row--active': !selectedRound },
-            )}
+            <tr
+              className={classNames(
+                'game-table__row',
+                { 'game-table__row--active': !selectedRound },
+              )}
+              onClick={() => dispatch(selectRound(null))}
             >
               <td className="game-table__cell">
                 {dealer}

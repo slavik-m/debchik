@@ -4,23 +4,28 @@ import Button from '$components/lib/Button';
 import ToggleButton from '$components/lib/ToggleButton';
 import Counter from '$components/lib/Counter';
 import { setEdit, changeRound } from '$store/game/actions';
+import { getSelectedRound, getSelectedRoundIndex } from '$state/selectors/game';
 
 import './GroupForm.scss';
 
 const GroupForm = () => {
   const dispatch = useDispatch();
-  const [bella, setBella] = useState(false);
-  const [twenty, setTwenty] = useState(0);
-  const [fifty, setFifty] = useState(0);
-  const [scores, setScores] = useState(['', '']);
+  const selectedRound = useSelector(state => getSelectedRound(state), shallowEqual);
+  const selectedRoundIndex = useSelector(state => getSelectedRoundIndex(state), shallowEqual);
+  const [bella, setBella] = useState(selectedRound ? selectedRound.bella : false);
+  const [twenty, setTwenty] = useState(selectedRound ? selectedRound.twenty : 0);
+  const [fifty, setFifty] = useState(selectedRound ? selectedRound.fifty : 0);
+  const [scores, setScores] = useState(selectedRound ? selectedRound.scores : ['', '']);
 
   const players = useSelector(state => state.game.players, shallowEqual);
   const flattenPlayers = players.flat();
   // const selectedRound = useSelector(state => state.game.selectedRound, shallowEqual);
   const rounds = useSelector(state => state.game.rounds);
 
-  const dealer = flattenPlayers[[0, 2, 1, 3][rounds.length % flattenPlayers.length]];
-  const [gamePlayer, setGamePlayer] = useState(dealer);
+  const dealer = selectedRoundIndex !== -1
+    ? flattenPlayers[[0, 2, 1, 3][selectedRoundIndex % flattenPlayers.length]]
+    : flattenPlayers[[0, 2, 1, 3][rounds.length % flattenPlayers.length]];
+  const [gamePlayer, setGamePlayer] = useState(selectedRound ? selectedRound.gamePlayer : dealer);
 
   const roundScore = 162 + (bella ? 20 : 0) + twenty * 20 + fifty * 50;
 
@@ -51,7 +56,7 @@ const GroupForm = () => {
       twenty,
       fifty,
       scores,
-    }));
+    }, selectedRound ? selectedRound.id : null));
   }
 
   return (
