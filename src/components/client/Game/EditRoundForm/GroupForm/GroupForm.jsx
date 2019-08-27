@@ -62,8 +62,7 @@ const GroupForm = () => {
   return (
     <>
       <div className="edit-round-form__game-score">
-        GAME:
-        {' '}
+        <div className="game-score__label">GAME</div>
         <b>{roundScore}</b>
       </div>
       <div>
