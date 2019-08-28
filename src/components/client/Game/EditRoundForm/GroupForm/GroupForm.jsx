@@ -66,25 +66,20 @@ const GroupForm = () => {
         <b>{roundScore}</b>
       </div>
       <div>
-        <div className="options__item">
-          <div className="bella">
-            Bella
-            <Switch selected={bella} onChange={setBella} />
-          </div>
+        <div className="options__item flex-center">
+          Bella
+          <Switch selected={bella} onChange={setBella} />
         </div>
-        <div className="options__item">
-          <Counter value={twenty} onChange={setTwenty}>
-            Twenty:
-          </Counter>
+        <div className="options__item flex-center">
+          Twenty
+          <Counter value={twenty} onChange={setTwenty} />
         </div>
-        <div className="options__item">
-          <Counter value={fifty} onChange={setFifty}>
-            Fifty:
-          </Counter>
+        <div className="options__item flex-center">
+          Fifty
+          <Counter value={fifty} onChange={setFifty} />
         </div>
-        <div className="options__item">
-          Dealer:
-          {' '}
+        <div className="options__item flex-center">
+          Dealer
           <b>{dealer}</b>
         </div>
         <div className="options__item flex-center">

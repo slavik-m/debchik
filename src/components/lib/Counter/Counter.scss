@@ -5,10 +5,21 @@
 
   &__value {
     margin: 0 10px;
+    min-width: 30px;
   }
 
   &__controls {
     display: flex;
     align-items: center;
+  }
+
+  &__decrement, &__increment {
+    border: 2px solid #dedede;
+    background: #FFF;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    padding-bottom: 3px;
   }
 }
