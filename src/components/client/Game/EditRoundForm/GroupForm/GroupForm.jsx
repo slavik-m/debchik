@@ -61,10 +61,6 @@ const GroupForm = () => {
 
   return (
     <>
-      <div className="edit-round-form__game-score">
-        <div className="game-score__label">GAME</div>
-        <b>{roundScore}</b>
-      </div>
       <div>
         <div className="options__item flex-center">
           Bella
@@ -84,7 +80,7 @@ const GroupForm = () => {
         </div>
         <div className="options__item flex-center">
           <div>Player:</div>
-          <select id="player" value={gamePlayer} onChange={ev => setGamePlayer(ev.target.value)}>
+          <select id="player" dir="rtl" value={gamePlayer} onChange={ev => setGamePlayer(ev.target.value)}>
             {
               flattenPlayers.map(player => (
                 <option key={player} value={player}>{player}</option>
@@ -92,6 +88,10 @@ const GroupForm = () => {
             }
           </select>
         </div>
+      </div>
+      <div className="edit-round-form__game-score">
+        <div className="game-score__label">GAME</div>
+        <b>{roundScore}</b>
       </div>
       <div className="edit-round-form__scores">
         {
