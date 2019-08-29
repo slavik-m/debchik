@@ -1,10 +1,13 @@
 .button__switcher {
   margin: 5px 15px;
   width: 5em;
-  height: 3em;
+  height: 2.3em;
+  border: 2px solid #dedede;
+  background: #FFF;
 }
 
-.button--active, .button--active:active {
+.button--active, .button--active:active, .button--active:focus {
   background-color: #2e7d32;
+  border: 2px solid #2e7d32;
   color: #FFF;
 }

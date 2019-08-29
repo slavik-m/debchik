@@ -73,35 +73,3 @@ h4 {
 .game-form__players-count {
   margin-bottom: 5px;
 }
-
-.game-form__player-names {
-  :nth-child(1) {
-    background-color: #fff9c4;
-  }
-
-  :nth-child(2) {
-    background-color: #c8e6c9;
-  }
-
-  :nth-child(3) {
-    background-color: #b3e5fc;
-  }
-}
-
-.player-names--grouped {
-  :nth-child(1) {
-    background-color: #fff9c4;
-  }
-
-  :nth-child(2) {
-    background-color: #fff9c4;
-  }
-
-  :nth-child(3) {
-    background-color: #c8e6c9;
-  }
-
-  :nth-child(4) {
-    background-color: #c8e6c9;
-  }
-}

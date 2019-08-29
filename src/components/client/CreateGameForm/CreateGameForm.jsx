@@ -54,7 +54,7 @@ const CreateGameForm = () => {
           (new Array(playersCount)).fill(0).map((_, i) => (
             <input
               key={i}
-              className={classNames()}
+              className={classNames('player-name-input')}
               type="text"
               value={players[i] || ''}
               onChange={(ev) => {
