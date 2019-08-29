@@ -26,7 +26,7 @@ const GameTable = () => {
   }
 
   return (
-    <div>
+    <div className="game-table-container">
       <table className="game-table">
         <thead>
           <tr>
@@ -98,7 +98,7 @@ const GameTable = () => {
                   selectedRound === round.id
                     ? (
                       <Button className="button--edit" onClick={() => dispatch(setEdit(true))}>
-                        <EditIcon />
+                        <EditIcon width={16} height={16} />
                       </Button>
                     )
                     : null

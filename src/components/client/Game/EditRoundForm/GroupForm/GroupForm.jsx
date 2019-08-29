@@ -79,7 +79,7 @@ const GroupForm = () => {
           <b>{dealer}</b>
         </div>
         <div className="options__item flex-center">
-          <div>Player:</div>
+          <div>Player</div>
           <select id="player" dir="rtl" value={gamePlayer} onChange={ev => setGamePlayer(ev.target.value)}>
             {
               flattenPlayers.map(player => (

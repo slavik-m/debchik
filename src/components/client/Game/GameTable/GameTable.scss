@@ -29,17 +29,25 @@
 
   &__cell {
     height: 42px;
-    min-width: 50px;
+    min-width: 61px;
   }
 
   &__row {
+    &:first-child td {
+      border-top-width: 2px;
+    }
+
     &--active td {
       background: #EBEBEB;
     }
 
     &--winners {
-      color: red;
+      color: #f44336;
       font-weight: bold;
+
+      td {
+        border-top-width: 2px;
+      }
     }
 
     &:nth-last-child(2) {
@@ -54,8 +62,8 @@
   .button--edit {
     margin: 0 0 0 5px;
     border-radius: 50%;
-    width: 52px;
-    height: 52px;
+    width: 46px;
+    height: 46px;
   }
 }
 
@@ -86,4 +94,8 @@
 
 .button__new-game {
   margin: 40px 15px;
+}
+
+.game-table-container {
+  padding-left: 30px;
 }
