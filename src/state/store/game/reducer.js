@@ -1,5 +1,5 @@
 import produce from 'immer';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import { getSelectedRound, getSelectedRoundIndex } from '../../selectors/game';
 import * as actionTypes from './actionTypes';
 
