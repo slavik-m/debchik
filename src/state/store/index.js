@@ -3,7 +3,7 @@ import {
 } from 'redux/es/redux';
 import { setAutoFreeze } from 'immer';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage/session';
+import storage from 'redux-persist/lib/storage';
 import game from './game/reducer';
 
 const persistConfig = {
