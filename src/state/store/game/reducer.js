@@ -38,6 +38,7 @@ export default (state = initialState, action = {}) => produce(state, (draft) => 
       const byte = (gamePlayerIndex < 2 && action.round.scores[0] < action.round.scores[1])
           || (gamePlayerIndex > 1 && action.round.scores[1] < action.round.scores[0]);
 
+      // TODO: fix eggs bug
       const eggs = action.round.scores[0] === action.round.scores[1] && action.round.scores[1];
       const { scores } = action.round;
 
