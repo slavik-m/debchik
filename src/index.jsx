@@ -7,8 +7,6 @@ import App from './components/client/App';
 
 import store, { persistor } from './state/store';
 
-// require('$assets/fonts.css');
-
 render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
