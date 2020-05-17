@@ -52,14 +52,20 @@
 
     &:nth-last-child(2) {
       .game-table__cell--score {
-        font-size: 1.2em;
-        font-weight: bold;
+        font-size: 1.4em;
+        font-weight: 900;
         padding: 5px;
+      }
+
+      .diff-score {
+        font-size: 0.8em;
+        font-weight: 900;
       }
     }
   }
 
   .button--edit {
+    position: relative;
     margin: 0 0 0 5px;
     border-radius: 50%;
     width: 46px;
@@ -74,13 +80,18 @@
 
 .round-score {
   position: absolute;
-  top: 21px;
-  left: -69px;
+  top: 15%;
+  left: -71px;
   font-size: 0.4em;
   color: #b1601b;
   background: #FFF;
   padding: 2px;
   border-radius: 3px;
+}
+
+.diff-score {
+  font-size: 0.5em;
+  color: #0d47a1;
 }
 
 .game-player {

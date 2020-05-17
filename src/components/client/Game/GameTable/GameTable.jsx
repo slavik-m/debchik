@@ -94,6 +94,8 @@ const GameTable = () => {
                 })
               }
               <td>
+                <div className="round-score">{round.roundScore}</div>
+                <div className="diff-score">{Math.abs(getTotalRoundScore(i, 0) - getTotalRoundScore(i, 1))}</div>
                 {
                   selectedRound === round.id
                     ? (
@@ -103,7 +105,6 @@ const GameTable = () => {
                     )
                     : null
                 }
-                <div className="round-score">{round.roundScore}</div>
               </td>
             </tr>
           ))
