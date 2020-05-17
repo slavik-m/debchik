@@ -10,12 +10,12 @@ export const newGame = () => ({
   type: actions.NEW_GAME,
 });
 
-export const setEdit = edit => ({
+export const setEdit = (edit) => ({
   type: actions.SET_EDIT,
   edit,
 });
 
-export const selectRound = roundId => ({
+export const selectRound = (roundId) => ({
   type: actions.SELECT_ROUND,
   roundId,
 });

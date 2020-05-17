@@ -8,7 +8,7 @@ import './Switcher.scss';
 const Switcher = ({ values, value, onChange }) => (
   <div className="switcher">
     {
-      values.map(v => (
+      values.map((v) => (
         <Button
           key={v}
           className={classNames('button__switcher', { 'button--active': v === value })}

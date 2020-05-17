@@ -10,17 +10,17 @@ import './GroupForm.scss';
 
 const GroupForm = () => {
   const dispatch = useDispatch();
-  const selectedRound = useSelector(state => getSelectedRound(state), shallowEqual);
-  const selectedRoundIndex = useSelector(state => getSelectedRoundIndex(state), shallowEqual);
+  const selectedRound = useSelector((state) => getSelectedRound(state), shallowEqual);
+  const selectedRoundIndex = useSelector((state) => getSelectedRoundIndex(state), shallowEqual);
   const [bella, setBella] = useState(selectedRound ? selectedRound.bella : false);
   const [twenty, setTwenty] = useState(selectedRound ? selectedRound.twenty : 0);
   const [fifty, setFifty] = useState(selectedRound ? selectedRound.fifty : 0);
   const [scores, setScores] = useState(selectedRound ? selectedRound.scores : ['', '']);
 
-  const players = useSelector(state => state.game.players, shallowEqual);
+  const players = useSelector((state) => state.game.players, shallowEqual);
   const flattenPlayers = players.flat();
   // const selectedRound = useSelector(state => state.game.selectedRound, shallowEqual);
-  const rounds = useSelector(state => state.game.rounds);
+  const rounds = useSelector((state) => state.game.rounds);
 
   const dealer = selectedRoundIndex !== -1
     ? flattenPlayers[[0, 2, 1, 3][selectedRoundIndex % flattenPlayers.length]]
@@ -80,9 +80,9 @@ const GroupForm = () => {
         </div>
         <div className="options__item flex-center">
           <div>Player</div>
-          <select id="player" dir="rtl" value={gamePlayer} onChange={ev => setGamePlayer(ev.target.value)}>
+          <select id="player" dir="rtl" value={gamePlayer} onChange={(ev) => setGamePlayer(ev.target.value)}>
             {
-              flattenPlayers.map(player => (
+              flattenPlayers.map((player) => (
                 <option key={player} value={player}>{player}</option>
               ))
             }
@@ -108,7 +108,7 @@ const GroupForm = () => {
                   : null
               }
               { `${player[0][0]} + ${player[1][0]}`}
-              <input type="number" value={scores[i]} onChange={ev => onScoreChange(i, parseInt(ev.target.value, 10))} />
+              <input type="number" value={scores[i]} onChange={(ev) => onScoreChange(i, parseInt(ev.target.value, 10))} />
               {
                 (player[0] === gamePlayer || player[1] === gamePlayer) && i === 1
                   ? <Button className="byte-right" onClick={() => onScoreChange(i, 0)}>B</Button>

@@ -15,26 +15,18 @@ module.exports = {
   },
   root: true,
   globals: {
-    CLIENT_TYPE: true,
-    APP_TYPE: true,
     VERSION: true,
-    DEV_SERVER: true,
-    HOST: true,
-    PORT: true,
   },
   rules: {
     'jsx-a11y/no-static-element-interactions': ['warn'],
     'jsx-a11y/click-events-have-key-events': 0,
-    'no-plusplus': ['error', { "allowForLoopAfterthoughts": true }],
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'max-len': ['warn', { code: 100, ignoreComments: true }],
     'prefer-destructuring': ['warn', { object: true, array: true }],
     'no-underscore-dangle': 0,
     'no-console': 0,
     'import/no-extraneous-dependencies': ['warn'],
     'import/prefer-default-export': ['warn'],
-    'import/no-unresolved': ['error', {
-      "ignore": [ /CLIENT_TYPE/ ]
-    }],
     'no-nested-ternary': 0,
     'no-param-reassign': 0,
     'no-restricted-globals': 0,
@@ -43,13 +35,13 @@ module.exports = {
     'react/sort-prop-types': ['warn'],
     'react/no-typos': ['warn'],
     'react/forbid-prop-types': ['warn'],
-    'react/destructuring-assignment': [true, 'never'],
+    'react/destructuring-assignment': ['error', 'always'],
     'react/button-has-type': ['warn'],
     'react/require-default-props': ['warn'],
 
     'jsx-a11y/label-has-for': ['warn'],
     'react/no-array-index-key': ['warn'],
-    'react/prop-types': ['warn']
+    'react/prop-types': ['warn'],
   },
   settings: {
     'import/resolver': {

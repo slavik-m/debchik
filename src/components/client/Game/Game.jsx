@@ -6,15 +6,14 @@ import EditRoundForm from './EditRoundForm';
 import './Game.scss';
 
 const Game = () => {
-  const edit = useSelector(state => state.game.edit, shallowEqual);
+  const edit = useSelector((state) => state.game.edit, shallowEqual);
   // const selectedRound = useSelector(state => state.game.selectedRound, shallowEqual);
 
   return (
     <div className="game">
       { !edit
         ? <GameTable />
-        : <EditRoundForm />
-      }
+        : <EditRoundForm />}
     </div>
   );
 };

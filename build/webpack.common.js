@@ -2,9 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -27,9 +25,6 @@ module.exports = {
           devMode
             ? {
               loader: 'style-loader',
-              options: {
-                sourceMap: devMode,
-              },
             } : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
@@ -43,76 +38,17 @@ module.exports = {
               sourceMap: devMode,
             },
           },
-          {
-            loader: 'sass-resources-loader',
-            options: {
-              sourceMap: devMode,
-              resources: [
-                path.join(__dirname, '../src/styles/variables.scss'),
-              ],
-            },
-          },
         ],
-      },
-      {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        include: [
-          path.resolve(__dirname, '../src/assets/fonts'),
-        ],
-        exclude: path.resolve(__dirname, '../src/assets/images'),
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-          },
-        }],
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/,
-        include: [
-          path.resolve(__dirname, '../src/assets/images'),
-        ],
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-          },
-        }],
       },
     ],
   },
   plugins: [
-    // new WebpackGitHash(),
-    new CircularDependencyPlugin({
-      exclude: /node_modules/,
-      // add errors to webpack instead of warnings
-      failOnError: true,
-      // set the current working directory for displaying module paths
-      cwd: process.cwd(),
-    }),
-    /* new CopyWebpackPlugin([
-      path.resolve(__dirname, '../src/assets/images'),
-    ]), */
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].min.css',
       chunkFilename: devMode ? '[id].css' : '[id].min.css',
     }),
-    new LodashModuleReplacementPlugin({
-      currying: true,
-      shorthands: true,
-    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '..', 'src', 'assets', 'index.html'),
-      files: {
-        js: [
-          path.join(__dirname, '..', 'src', 'index.jsx'),
-        ],
-        chunks: {
-          main: {
-            entry: path.join(__dirname, '..', 'src', 'index.jsx'),
-          },
-        },
-      },
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -132,16 +68,13 @@ module.exports = {
   },
   resolve: {
     alias: {
-      // 'lodash-es': 'lodash',
       $helpers: path.resolve(__dirname, '../src/helpers'),
-      $assets: path.resolve(__dirname, '../src/assets'),
       $store: path.resolve(__dirname, '../src/state/store'),
       $state: path.resolve(__dirname, '../src/state'),
-      $services: path.resolve(__dirname, '../src/services'),
       $constants: path.resolve(__dirname, '../src/constants'),
       $components: path.resolve(__dirname, '../src/components'),
     },
-    extensions: ['.js', '.jsx', '.json', '.sass', '.scss', '.svg'],
+    extensions: ['.js', '.jsx', '.scss'],
   },
   // stats: 'minimal',
 };

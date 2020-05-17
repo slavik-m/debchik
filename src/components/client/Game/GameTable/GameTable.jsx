@@ -12,11 +12,11 @@ import './GameTable.scss';
 const GameTable = () => {
   const dispatch = useDispatch();
   const [confirm, setConfirm] = useState(false);
-  const players = useSelector(state => state.game.players, shallowEqual);
+  const players = useSelector((state) => state.game.players, shallowEqual);
   const flattenPlayers = players.flat();
-  const rounds = useSelector(state => state.game.rounds);
-  const score = useSelector(state => state.game.gameScore);
-  const selectedRound = useSelector(state => state.game.selectedRound);
+  const rounds = useSelector((state) => state.game.rounds);
+  const score = useSelector((state) => state.game.gameScore);
+  const selectedRound = useSelector((state) => state.game.selectedRound);
 
   const dealer = flattenPlayers[[0, 2, 1, 3][rounds.length % flattenPlayers.length]];
   const winnerIndex = getWinnerIndex(rounds, players, score);

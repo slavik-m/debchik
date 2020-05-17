@@ -39,7 +39,7 @@ export default (state = initialState, action = {}) => produce(state, (draft) => 
           || (gamePlayerIndex > 1 && action.round.scores[1] < action.round.scores[0]);
 
       const eggs = action.round.scores[0] === action.round.scores[1] && action.round.scores[1];
-      const scores = action.round.scores;
+      const { scores } = action.round;
 
       if (byte && action.round.scores[0] < action.round.scores[1]) {
         scores[0] = 0;

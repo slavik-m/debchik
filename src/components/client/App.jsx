@@ -6,7 +6,7 @@ import Game from './Game';
 import './App.scss';
 
 const App = () => {
-  const game = useSelector(state => state.game, shallowEqual);
+  const game = useSelector((state) => state.game, shallowEqual);
 
   return (
     <div className="app">

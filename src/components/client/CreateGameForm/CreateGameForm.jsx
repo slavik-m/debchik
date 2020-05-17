@@ -15,7 +15,7 @@ const CreateGameForm = () => {
   const [players, setPlayers] = useState(['Я', 'Белый', 'Слава', 'Витя']);
 
   function startGame() {
-    if (players.filter(p => p).length < playersCount) {
+    if (players.filter((p) => p).length < playersCount) {
       return;
     }
 

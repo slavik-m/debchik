@@ -6,14 +6,13 @@ import SingleForm from './SingleForm';
 import './EditRoundForm.scss';
 
 const EditRoundForm = () => {
-  const players = useSelector(state => state.game.players, shallowEqual);
+  const players = useSelector((state) => state.game.players, shallowEqual);
 
   return (
     <div className="edit-round-form">
       { players.length === 3
         ? <SingleForm />
-        : <GroupForm />
-      }
+        : <GroupForm />}
     </div>
   );
 };

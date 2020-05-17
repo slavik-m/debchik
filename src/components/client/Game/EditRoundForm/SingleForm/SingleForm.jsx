@@ -5,7 +5,7 @@ import { setEdit } from '$store/game/actions';
 
 const SingleForm = () => {
   const dispatch = useDispatch();
-  const players = useSelector(state => state.game.players, shallowEqual);
+  const players = useSelector((state) => state.game.players, shallowEqual);
 
   return (
     <>

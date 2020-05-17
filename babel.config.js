@@ -1,16 +1,10 @@
-const plugins = [
-  'dynamic-import-node',
-  ['lodash'],
-];
+const plugins = [];
 
-const prodTargets = ['last 2 Chrome versions', 'iOS >= 11'];
-const devTargets = ['last 2 Chrome versions', 'iOS >= 11'];
-
-const getPresets = dev => [
+const presets = [
   [
     '@babel/env',
     {
-      targets: dev ? devTargets : prodTargets,
+      targets: ['last 2 Chrome versions', 'iOS >= 11'],
       modules: false,
       useBuiltIns: 'usage',
       corejs: 3,
@@ -23,29 +17,17 @@ module.exports = {
   env: {
     production: {
       plugins: plugins.concat([
-        ['transform-react-remove-prop-types', {
-          removeImport: true,
-        }],
+        ['transform-react-remove-prop-types', { removeImport: true }],
       ]),
-      presets: getPresets(false),
+      presets,
     },
     development: {
       plugins: plugins.concat(['react-hot-loader/babel']),
-      presets: getPresets(true),
+      presets,
     },
     test: {
-      plugins: plugins.concat(['@babel/plugin-transform-modules-commonjs', 'babel-plugin-redux-saga']),
-      presets: [
-        [
-          '@babel/env',
-          {
-            targets: 'last 2 Chrome versions',
-            modules: false,
-            useBuiltIns: 'usage',
-          },
-        ],
-        '@babel/preset-react',
-      ],
+      plugins: plugins.concat(['@babel/plugin-transform-modules-commonjs']),
+      presets: presets,
     },
   },
 };
