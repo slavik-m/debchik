@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const GitRevisionPlugin = require('git-revision-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -43,9 +44,10 @@ module.exports = {
     ],
   },
   plugins: [
+    new GitRevisionPlugin(),
     new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].min.css',
-      chunkFilename: devMode ? '[id].css' : '[id].min.css',
+      filename: devMode ? '[name].css' : '[name]-[git-revision-hash].min.css',
+      chunkFilename: devMode ? '[id].css' : '[id]-[git-revision-hash].min.css',
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '..', 'src', 'assets', 'index.html'),
@@ -62,8 +64,8 @@ module.exports = {
     }),
   ],
   output: {
-    filename: devMode ? '[name].js' : '[name].min.js',
-    chunkFilename: devMode ? '[id].js' : '[id].min.js',
+    filename: devMode ? '[name].js' : '[name]-[git-revision-hash].min.js',
+    chunkFilename: devMode ? '[id].js' : '[id]-[git-revision-hash].min.js',
     path: path.join(__dirname, '..', 'docs'),
   },
   resolve: {
