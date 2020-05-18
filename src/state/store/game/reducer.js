@@ -5,12 +5,6 @@ import * as actionTypes from './actionTypes';
 
 const initialState = null;
 
-function getRoundWinnerIndex(scores) {
-  const maxScore = Math.max(...scores);
-
-  return scores.indexOf(maxScore);
-}
-
 export default (state = initialState, action = {}) => produce(state, (draft) => {
   switch (action.type) {
     case actionTypes.CREATE_GAME:
@@ -52,14 +46,8 @@ export default (state = initialState, action = {}) => produce(state, (draft) => 
         scores[0] = roundScore;
       }
 
-      const previousRound = draft.rounds[draft.rounds.length - 1];
-
       if (eggs) {
         scores[[0, 0, 1, 1][gamePlayerIndex]] = 0;
-      }
-
-      if (previousRound && previousRound.eggs) {
-        scores[getRoundWinnerIndex(scores)] += previousRound.eggs;
       }
 
       const round = {

@@ -4,7 +4,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { setEdit, newGame, selectRound } from '$store/game/actions';
 import Button from '$components/lib/Button';
 import EditIcon from '$components/lib/svg/EditIcon';
-import getWinnerIndex from '$helpers/getWinnerIndex';
+import getWinnerIndex, { getTotalScore, getRoundWinnerIndex } from '$helpers/getWinnerIndex';
 import isOwnGame from '$helpers/isOwnGame';
 
 import './GameTable.scss';
@@ -22,7 +22,7 @@ const GameTable = () => {
   const winnerIndex = getWinnerIndex(rounds, players, score);
 
   function getTotalRoundScore(i, si) {
-    return rounds.slice(0, i + 1).reduce((acc, cur) => acc + cur.scores[si], 0);
+    return getTotalScore(rounds.slice(0, i + 1), si);
   }
 
   return (
@@ -65,30 +65,52 @@ const GameTable = () => {
                 </div>
               </td>
               {
-                round.scores.map((s, si) => {
-                  // TODO: eggs
+                round.scores.map((roundScore, si) => {
+                  const previousRound = rounds[i - 1];
+                  const isCurrentRoundEggs = !round.byte && roundScore === 0 && round.eggs;
+                  const isWin = getRoundWinnerIndex(round.scores) === si;
                   let scoreString = '';
+                  let eggs = 0;
 
-                  if (round.byte && s === 0) {
+                  if (round.byte && roundScore === 0) {
                     scoreString = 'B';
                   }
 
-                  if (!round.byte && s === 0) {
+                  if (!round.byte && roundScore === 0) {
                     scoreString = '-';
                   }
 
-                  if (!round.byte && s === 0 && round.eggs) {
+                  if (isCurrentRoundEggs) {
                     scoreString = 'ထ';
                   }
 
-                  if (s > 0) {
+                  if (roundScore > 0) {
                     scoreString = getTotalRoundScore(i, si);
+
+                    if (previousRound && previousRound.eggs && isWin) {
+                      eggs = previousRound.eggs;
+                    }
                   }
 
                   return (
-                    <td key={si} className="game-table__cell game-table__cell--score">
-                      { i !== 0 ? <div className="round-score-value">{`+${s}`}</div> : null }
+                    <td
+                      key={si}
+                      className={classNames(
+                        'game-table__cell',
+                        'game-table__cell--score',
+                        { 'game-table__cell--with-eggs': isCurrentRoundEggs },
+                      )}
+                    >
+                      { i !== 0 ? (
+                        <div className="round-score-value">
+                          {`+${roundScore}`}
+                          { eggs ? <span className="round-score-eggs">{`+${eggs}`}</span> : null }
+                        </div>
+                      ) : null }
                       {scoreString}
+                      {
+                        round.eggs && !isWin ? <span className="round-eggs">{round.eggs}</span> : null
+                      }
                     </td>
                   );
                 })
