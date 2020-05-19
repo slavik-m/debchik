@@ -10,6 +10,7 @@
 - [x] Fix eggs bug
 - [ ] Add round balance sync
 - [ ] Add PWA functionality
+- [x] Disable double tap scale on iPhone
 - [ ] Add tests
 - [ ] Select gamers
 - [ ] Add game session
