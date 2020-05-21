@@ -1,9 +1,12 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 const path = require('path');
 const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -44,7 +47,13 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new GitRevisionPlugin(),
+    new CopyPlugin({
+      patterns: [
+        { from: path.join(__dirname, '..', 'src', 'assets') },
+      ],
+    }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name]-[git-revision-hash].min.css',
       chunkFilename: devMode ? '[id].css' : '[id]-[git-revision-hash].min.css',
@@ -61,6 +70,10 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
+    }),
+    new GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
     }),
   ],
   output: {

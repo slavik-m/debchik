@@ -9,7 +9,6 @@ html, body {
 body {
   color: #333;
   margin: 0;
-  padding: 15px 25px;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   overflow: auto;
@@ -70,8 +69,22 @@ h4 {
 
 .app {
   text-align: center;
+  padding: 15px 25px;
 }
 
 .game-form__players-count {
   margin-bottom: 5px;
+}
+
+.install-dialog {
+  background: #D8D5DB;
+  margin: 0;
+  padding: 15px 0;
+  text-align: center;
+}
+
+.install-dialog__buttons {
+  & > button {
+    margin: 5px;
+  }
 }
