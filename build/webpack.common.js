@@ -11,7 +11,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  entry: path.join(__dirname, '..', 'src', 'index2.jsx'),
+  entry: path.join(__dirname, '..', 'src', 'index.jsx'),
   module: {
     rules: [
       {
