@@ -51,7 +51,8 @@ module.exports = {
     new GitRevisionPlugin(),
     new CopyPlugin({
       patterns: [
-        { from: path.join(__dirname, '..', 'src', 'assets') },
+        { from: path.join(__dirname, '..', 'src', 'assets', 'images'), to: 'images' },
+        { from: path.join(__dirname, '..', 'src', 'assets', 'manifest.json') },
       ],
     }),
     new MiniCssExtractPlugin({

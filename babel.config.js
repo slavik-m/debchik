@@ -27,7 +27,7 @@ module.exports = {
     },
     test: {
       plugins: plugins.concat(['@babel/plugin-transform-modules-commonjs']),
-      presets: presets,
+      presets,
     },
   },
 };
