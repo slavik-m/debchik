@@ -6,12 +6,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const { GenerateSW } = require('workbox-webpack-plugin');
+// const { GenerateSW } = require('workbox-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  entry: path.join(__dirname, '..', 'src', 'index.jsx'),
+  entry: path.join(__dirname, '..', 'src', 'index2.jsx'),
   module: {
     rules: [
       {
@@ -71,10 +71,10 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
     }),
-    new GenerateSW({
+    /* new GenerateSW({
       clientsClaim: true,
       skipWaiting: true,
-    }),
+    }), */
   ],
   output: {
     filename: devMode ? '[name].js' : '[name]-[git-revision-hash].min.js',
