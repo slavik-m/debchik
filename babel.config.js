@@ -1,5 +1,4 @@
-// const plugins = ['@babel/plugin-proposal-class-properties'];
-const plugins = [];
+const plugins = ['@babel/plugin-proposal-class-properties'];
 
 const presets = [
   [
@@ -17,9 +16,9 @@ const presets = [
 module.exports = {
   env: {
     production: {
-      plugins: [
+      plugins: plugins.concat([
         ['transform-react-remove-prop-types', { removeImport: true }],
-      ].concat(plugins),
+      ]),
       presets,
     },
     development: {
@@ -27,7 +26,7 @@ module.exports = {
       presets,
     },
     test: {
-      plugins: ['@babel/plugin-transform-modules-commonjs'].concat(plugins),
+      plugins: plugins.concat(['@babel/plugin-transform-modules-commonjs']),
       presets,
     },
   },

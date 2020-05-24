@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
-// import Pullable from '$components/lib/Pullable';
-// import disableDoubleTapZoom from '$helpers/disableDoubleTapZoom';
+import Pullable from '$components/lib/Pullable';
+import disableDoubleTapZoom from '$helpers/disableDoubleTapZoom';
 import CreateGameForm from './CreateGameForm';
 import Game from './Game';
 
 import './App.scss';
 
-// disableDoubleTapZoom();
+disableDoubleTapZoom();
 
 let deferredPrompt;
 
@@ -48,13 +48,14 @@ const App = () => {
   }
 
   return (
-    <div>
+    <Pullable
+      onRefresh={() => location.reload()}
+    >
       {
         isInstallDialog
           ? (
             <div className="install-dialog">
               <div>Install App!</div>
-              ddc
               <div className="install-dialog__buttons">
                 <button className="install-button" onClick={installApp}>Install</button>
                 <button onClick={() => showInstallDialog(false)}>Close</button>
@@ -70,7 +71,7 @@ const App = () => {
             : <CreateGameForm />
         }
       </div>
-    </div>
+    </Pullable>
   );
 };
 
