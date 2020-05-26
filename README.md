@@ -12,6 +12,7 @@
 - [x] Fix eggs bug
 - [ ] Add round balance sync
 - [x] Add PWA functionality
+- [ ] Experiments with PWA
 - [x] Add splash screen
 - [x] Disable double tap scale on iPhone
 - [ ] Add tests
