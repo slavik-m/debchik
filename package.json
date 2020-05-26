@@ -14,7 +14,7 @@
     "coverage": "cross-env  NODE_ENV=test jest --collectCoverage",
     "lint": "eslint --quiet src --ext .js,.jsx"
   },
-  "author": "",
+  "author": "slavik-m",
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint"
