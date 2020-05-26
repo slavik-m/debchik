@@ -50,8 +50,6 @@ class Pullable extends React.Component {
   };
 
   onTouchMove = (e) => {
-    console.log('onTouchEnd 3');
-
     if (this.props.disabled || this.ignoreTouches || this.pullStartY === null) return;
 
     this.pullMoveY = e.touches[0].screenY;
@@ -62,17 +60,20 @@ class Pullable extends React.Component {
 
       this.distResisted = Math.min(this.dist / this.props.resistance, this.props.distThreshold);
 
-      this.setState({ status: 'pulling', height: this.distResisted }, () => {
-        if (this.distResisted === this.props.distThreshold) this.refresh();
+      this.setState({ status: 'pulling', height: this.dist / this.props.resistance }, () => {
+        // if (this.distResisted === this.props.distThreshold) this.refresh();
       });
     }
   };
 
   onTouchEnd = () => {
-    console.log('onTouchEndd ');
     if (this.props.disabled || this.ignoreTouches) return;
 
     if (this.state.status === 'pulling') {
+      if (this.distResisted === this.props.distThreshold) {
+        this.refresh();
+        return;
+      }
       this.ignoreTouches = true;
       this.setState({ status: 'pullAborted', height: 0 }, () => {
         this.reset(this.props.resetDuration);
@@ -121,7 +122,7 @@ class Pullable extends React.Component {
           <div
             className="pullable__spinner"
             style={{
-              opacity: this.props.fadeSpinner ? pctPulled : 1,
+              opacity: pctPulled > 1 ? 1 : pctPulled / 2,
               transform: shouldReset
                 ? `translateY(${(pctPulled * (this.props.spinnerSize + this.props.spinnerOffset)) - this.props.spinnerSize}px) rotate(${this.props.rotateSpinner && shouldSpin ? 90 : 0}deg)`
                 : `translateY(${(pctPulled * (this.props.spinnerSize + this.props.spinnerOffset)) - this.props.spinnerSize}px) rotate(${this.props.rotateSpinner ? pctPulled * 90 : 0}deg)`,
@@ -165,7 +166,6 @@ class Pullable extends React.Component {
 Pullable.defaultProps = {
   className: 'pullable',
   centerSpinner: true,
-  fadeSpinner: true,
   rotateSpinner: true,
   spinnerSize: 24,
   spinnerOffset: 0,
@@ -173,7 +173,7 @@ Pullable.defaultProps = {
   spinSpeed: 1200,
   popDuration: 200,
   distThreshold: 72,
-  resistance: 2.5,
+  resistance: 3,
   refreshDuration: 1000,
   resetDuration: 400,
   resetEase: 'cubic-bezier(0.215, 0.61, 0.355, 1)',
@@ -185,7 +185,6 @@ Pullable.propTypes = {
   onRefresh: PropTypes.func.isRequired,
   className: PropTypes.string,
   centerSpinner: PropTypes.bool,
-  fadeSpinner: PropTypes.bool,
   rotateSpinner: PropTypes.bool,
   spinnerSize: PropTypes.number,
   spinnerOffset: PropTypes.number,
