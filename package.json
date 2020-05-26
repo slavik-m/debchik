@@ -6,6 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production BABEL_ENV=production webpack --config build/webpack.prod.js --progress",
     "dev": "webpack-dev-server --config build/webpack.dev.js --inline --colors --open --serve --hot --progress",
+    "deploy": "gh-pages -d dist",
     "start": "http-server docs",
     "test": "cross-env NODE_ENV=test jest",
     "stats": "cross-env NODE_ENV=production BABEL_ENV=production webpack --config build/webpack.prod.js --profile --json > stats.json",
