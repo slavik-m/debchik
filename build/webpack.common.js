@@ -80,7 +80,7 @@ module.exports = {
   output: {
     filename: devMode ? '[name].js' : '[name]-[git-revision-hash].min.js',
     chunkFilename: devMode ? '[id].js' : '[id]-[git-revision-hash].min.js',
-    path: path.join(__dirname, '..', 'docs'),
+    path: path.join(__dirname, '..', 'dist'),
   },
   resolve: {
     alias: {

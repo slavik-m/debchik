@@ -6,6 +6,7 @@ node_modules/
 stats.json
 build/config.js
 coverage/
+dist/
 
 cert.pem
 key.pem
