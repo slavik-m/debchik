@@ -56,8 +56,8 @@ module.exports = {
       ],
     }),
     new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name]-[git-revision-hash].min.css',
-      chunkFilename: devMode ? '[id].css' : '[id]-[git-revision-hash].min.css',
+      filename: devMode ? '[name].css' : '[name]-[git-revision-version].min.css',
+      chunkFilename: devMode ? '[id].css' : '[id]-[git-revision-version].min.css',
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '..', 'src', 'assets', 'index.html'),
@@ -78,8 +78,8 @@ module.exports = {
     }),
   ],
   output: {
-    filename: devMode ? '[name].js' : '[name]-[git-revision-hash].min.js',
-    chunkFilename: devMode ? '[id].js' : '[id]-[git-revision-hash].min.js',
+    filename: devMode ? '[name].js' : '[name]-[git-revision-version].min.js',
+    chunkFilename: devMode ? '[id].js' : '[id]-[git-revision-version].min.js',
     path: path.join(__dirname, '..', 'dist'),
   },
   resolve: {
