@@ -7,20 +7,16 @@ import App from './components/client/App';
 
 import store, { persistor } from './state/store';
 
-console.log(process.env.NODE_ENV === 'production');
-if (process.env.NODE_ENV === 'production') {
-  // eslint-disable-next-line global-require
-  require('$helpers/workbox');
+require('$helpers/workbox');
 
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js').then((registration) => {
-        console.log('SW registered: ', registration);
-      }).catch((registrationError) => {
-        console.log('SW registration failed: ', registrationError);
-      });
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+      console.log('SW registered: ', registration);
+    }).catch((registrationError) => {
+      console.log('SW registration failed: ', registrationError);
     });
-  }
+  });
 }
 
 render(

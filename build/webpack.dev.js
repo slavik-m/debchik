@@ -10,6 +10,6 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, '..', 'docs'),
     compress: true,
     host: '192.168.1.74',
-    port: 8081,
+    port: 8080,
   },
 });
